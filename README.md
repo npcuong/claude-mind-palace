@@ -48,10 +48,10 @@ Claude reads memory silently at the start of every session and writes updates at
 ### Commands
 | Command | Action |
 |---------|--------|
-| `nhớ điều này: [X]` | Save X to the right memory file |
-| `quên [X]` | Remove X from memory |
+| `remember: [X]` | Save X to the right memory file |
+| `forget [X]` | Remove X from memory |
 | `review memory` | Read all memory, report summary, suggest cleanup |
-| `memory của tôi` | Show what Claude currently knows about you |
+| `my memory` | Show what Claude currently knows about you |
 
 ---
 

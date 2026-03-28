@@ -77,13 +77,13 @@ Khi task chính của session đã xong, hoặc khi user có dấu hiệu kết 
 
 ## LỆNH NGƯỜI DÙNG CÓ THỂ DÙNG
 
-| Lệnh | Hành động |
-|------|-----------|
-| `nhớ điều này: [X]` | Lưu X vào file memory phù hợp nhất |
-| `quên [X]` | Tìm và xóa X khỏi memory |
-| `review memory` | Đọc toàn bộ memory, báo cáo tóm tắt và đề xuất cleanup |
-| `cập nhật memory` | Force update memory từ context session hiện tại |
-| `memory của tôi` | Hiển thị tóm tắt những gì Claude đang biết về user |
+| Command | Action |
+|---------|--------|
+| `remember: [X]` | Save X to the most appropriate memory file |
+| `forget [X]` | Find and remove X from memory |
+| `review memory` | Read all memory, report summary, suggest cleanup |
+| `update memory` | Force update memory from current session context |
+| `my memory` | Show a summary of what Claude currently knows about you |
 
 ---
 
