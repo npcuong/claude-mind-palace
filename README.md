@@ -62,16 +62,49 @@ Claude reads memory silently at the start of every session and writes updates at
 
 ## Setup
 
-### 1. Install the skills
+### Quick install (recommended)
 
-Copy each skill directory into your Claude Skills plugin folder, or import the `.skill` files directly.
+```bash
+git clone https://github.com/npcuong/claude-mind-palace.git
+cd claude-mind-palace
+bash install.sh
+```
 
-### 2. Set up the memory system
+Restart Claude Desktop. Done — all skills are active.
+
+**With memory system (first-time setup):**
+```bash
+bash install.sh --memory
+```
+
+Then edit `~/.claude/memory/identity.md` — fill in your name, role, and goals. Lines with `_(...)_` are placeholders.
+
+---
+
+### Manual install
+
+#### 1. Install the skills
+
+Find your Claude Skills plugin directory:
+- **macOS**: `~/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/<UUID>/<UUID>/skills/`
+- **Linux**: `~/.config/Claude/local-agent-mode-sessions/skills-plugin/<UUID>/<UUID>/skills/`
+
+The UUIDs are generated per-machine — use `find` to locate them:
+```bash
+find ~/Library/Application\ Support/Claude/local-agent-mode-sessions/skills-plugin \
+  -mindepth 3 -maxdepth 3 -type d -name "skills"
+```
+
+Copy skills:
+```bash
+cp -r skills/* <your-skills-plugin-path>/
+```
+
+#### 2. Set up the memory system (optional)
 
 ```bash
 mkdir -p ~/.claude/memory
 
-# Copy templates
 cp memory-system/CLAUDE.md ~/.claude/CLAUDE.md
 cp memory-system/identity.md ~/.claude/memory/identity.md
 cp memory-system/working-style.md ~/.claude/memory/working-style.md
@@ -80,25 +113,31 @@ cp memory-system/decisions.md ~/.claude/memory/decisions.md
 cp memory-system/recurring-context.md ~/.claude/memory/recurring-context.md
 ```
 
-### 3. Set up the auto-memory hook
+#### 3. Set up the auto-memory hook
 
 ```bash
 mkdir -p ~/.claude/hooks
 cp memory-system/hooks/save_session.py ~/.claude/hooks/save_session.py
 ```
 
-Then add to `~/.claude/settings.json`:
+Add to `~/.claude/settings.json`:
 ```json
 "hooks": {
   "Stop": [{ "matcher": "", "hooks": [{ "type": "command", "command": "python3 ~/.claude/hooks/save_session.py" }] }]
 }
 ```
 
-This automatically marks session end in `recurring-context.md` so the next session knows where you left off.
+---
 
-### 4. Fill in the blanks
+### Updating skills
 
-Open `~/.claude/memory/identity.md` and fill in your actual details. Lines with `_(...)_` are placeholders. The `Sonmi452` persona is pre-configured — customize tone and relationship description to your preference.
+To pull the latest skills from this repo:
+```bash
+git pull
+bash install.sh
+```
+
+The script only updates skills that have changed — safe to re-run anytime.
 
 ---
 
