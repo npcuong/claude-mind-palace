@@ -19,5 +19,5 @@ Thumbs.db
 *.tmp
 *.log
 
-# Claude local settings (permissions, not for sharing)
-.claude/settings.local.json
+# Claude local settings and launchers (not for sharing)
+.claude/

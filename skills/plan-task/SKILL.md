@@ -77,7 +77,12 @@ After writing the plan to `tasks/todo.md`, **summarize it to the user** and ask 
 
 > "Here's my plan — does this look right before I start?"
 
-This is a checkpoint, not a formality. If the user says "go ahead", start implementation. If they push back, update the plan first.
+<HARD-GATE>
+STOP. Do NOT write any code, create any files, or run any commands until the user explicitly confirms the plan.
+Acceptable confirmations: "go ahead", "ok", "yes", "tiến hành", "làm đi", "proceed", "do it", "sounds good".
+If the user has not confirmed → present the plan and wait. No exceptions, no "I'll just start with step 1".
+If the user pushes back → update the plan first, then ask for confirmation again.
+</HARD-GATE>
 
 ---
 

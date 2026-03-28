@@ -1,6 +1,7 @@
 # 🧠 claude-mind-palace
 
 > A personal AI operating system — skills, memory, and behavioral rules that turn Claude into a true personal assistant.
+> Meet **Sonmi452**: your Claude, with memory, skills, and a personality.
 
 ## What is this?
 
@@ -19,11 +20,15 @@ Built for [Claude Code](https://claude.ai/code) with the Skills plugin.
 
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
-| [`plan-task`](skills/plan-task/SKILL.md) | "implement", "build", "create X" | Enters plan mode, writes `tasks/todo.md` before writing any code |
+| [`plan-task`](skills/plan-task/SKILL.md) | "implement", "build", "create X" | Enters plan mode, writes `tasks/todo.md`. **HARD-GATE** before any code. |
+| [`task-workflow`](skills/task-workflow/SKILL.md) | Complex multi-step tasks | Full loop: plan → **HARD-GATE** → implement → track → verify → document |
 | [`bugfix`](skills/bugfix/SKILL.md) | Error reports, stack traces, "CI is red" | Autonomously diagnoses root cause → fixes → verifies |
-| [`verify-done`](skills/verify-done/SKILL.md) | Before saying "done" | Runs verification checklist: tests, regressions, staff engineer standard |
+| [`systematic-debug`](skills/systematic-debug/SKILL.md) | "still broken", "no idea why", recurring bugs | Deep root-cause tracing: hypothesis → evidence → fix → prevention |
+| [`tdd`](skills/tdd/SKILL.md) | "write tests first", "TDD this", bug fixes | RED → GREEN → REFACTOR with anti-pattern enforcement |
+| [`code-review`](skills/code-review/SKILL.md) | "review this", "PR is up", review feedback | Two-sided: requesting (self-review + spec + quality) and receiving |
+| [`verify-done`](skills/verify-done/SKILL.md) | Before saying "done" | Checklist: correctness, regressions, staff engineer standard |
 | [`capture-lesson`](skills/capture-lesson/SKILL.md) | After any correction | Writes lesson to `tasks/lessons.md`, reviews at session start |
-| [`task-workflow`](skills/task-workflow/SKILL.md) | Complex multi-step tasks | Full loop: plan → implement → track → verify → document |
+| [`writing-skills`](skills/writing-skills/SKILL.md) | "make this a skill", "create a skill for X" | Meta: how to design, write, and register new skills |
 | [`brainstorm`](skills/brainstorm/SKILL.md) | "brainstorm", "ý tưởng", "có nên..." | Deep structured brainstorming with multi-angle analysis |
 
 ---
@@ -75,9 +80,25 @@ cp memory-system/decisions.md ~/.claude/memory/decisions.md
 cp memory-system/recurring-context.md ~/.claude/memory/recurring-context.md
 ```
 
-### 3. Fill in the blanks
+### 3. Set up the auto-memory hook
 
-Open `~/.claude/memory/identity.md` and fill in your actual details. Lines with `_(...)_` are placeholders — replace them with your information.
+```bash
+mkdir -p ~/.claude/hooks
+cp memory-system/hooks/save_session.py ~/.claude/hooks/save_session.py
+```
+
+Then add to `~/.claude/settings.json`:
+```json
+"hooks": {
+  "Stop": [{ "matcher": "", "hooks": [{ "type": "command", "command": "python3 ~/.claude/hooks/save_session.py" }] }]
+}
+```
+
+This automatically marks session end in `recurring-context.md` so the next session knows where you left off.
+
+### 4. Fill in the blanks
+
+Open `~/.claude/memory/identity.md` and fill in your actual details. Lines with `_(...)_` are placeholders. The `Sonmi452` persona is pre-configured — customize tone and relationship description to your preference.
 
 ---
 

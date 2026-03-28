@@ -46,7 +46,14 @@ Before writing any code, create or update `tasks/todo.md`:
 
 ### Step 2: Verify the Plan — Check In Before Coding
 
-After writing the plan, **present it to the user** with a brief summary. Wait for confirmation before proceeding.
+After writing the plan, **present it to the user** with a brief summary.
+
+<HARD-GATE>
+STOP. Do NOT proceed to implementation until the user explicitly confirms.
+Acceptable: "go ahead", "ok", "yes", "tiến hành", "làm đi", "proceed", "do it".
+Not acceptable: silence, ambiguous response, or your own judgment that "they probably want me to start".
+If not confirmed → wait. If pushed back → revise plan, re-present, wait again.
+</HARD-GATE>
 
 ---
 
